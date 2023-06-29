@@ -1,0 +1,192 @@
+<link rel="stylesheet" href="/css/sidebar.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+
+<div id="sidebar-icons">
+    <div class="cross-icon">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+    <a class="dashboard-link" href="/student/dashboard">
+        <div class="icon">
+            <i class="fa-solid fa-house"></i>
+            <span class="sidebar-heading">Dashboard</span>
+        </div>
+    </a>
+    <a class="course-link" href="/courses">
+        <div class="icon">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span class="sidebar-heading">Courses</span>
+        </div>
+    </a>
+    <a class="calender-link">
+        <div class="icon">
+            <i class="fa-solid fa-calendar-days"></i>
+            <span class="sidebar-heading">Calender</span>
+        </div>
+    </a>
+    <div class="wrapper">
+        <div class="close-calender">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+        <header>
+            <p class="current-date"></p>
+            <div class="icons">
+                <span id="prev" class="material-symbols-rounded">chevron_left</span>
+                <span id="next" class="material-symbols-rounded">chevron_right</span>
+            </div>
+        </header>
+        <div class="calendar">
+            <ul class="weeks">
+                <li>Sun</li>
+                <li>Mon</li>
+                <li>Tue</li>
+                <li>Wed</li>
+                <li>Thu</li>
+                <li>Fri</li>
+                <li>Sat</li>
+            </ul>
+            <ul class="days"></ul>
+        </div>
+    </div>
+    <a class="certificate-link">
+        <div class="icon">
+            <i class="fa-solid fa-certificate"></i>
+            <span class="sidebar-heading">Certificates</span>
+        </div>
+        <div class="certificate-message">
+            <span>The Certificates module implementation is left for next iteration.</span>
+        </div>
+    </a>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#sidebar-icons .calender-link').click(function () {
+            if ($('#sidebar-icons .certificate-message:hidden').length === 0) {
+                $('#sidebar-icons .certificate-message').fadeToggle(100);
+            }
+            $('.wrapper').fadeToggle(300);
+        });
+        $('#sidebar-icons .certificate-link').click(function () {
+            if ($('.wrapper:hidden').length === 0) {
+                $('.wrapper').fadeToggle(100);
+            }
+            $('#sidebar-icons .certificate-message').fadeToggle(300);
+        });
+        $('.close-calender').click(function(){
+            $('.wrapper').hide(100);
+        })
+        $(window).resize(function () {
+            if ($(window).width() >= 510) {
+                if ($('#sidebar:hidden').length !== 0) {
+                    $('#sidebar-icons').animate({ width: 4.2 * 16 }, 300);
+                    $('#sidebar').show(400);
+                }
+            } else {
+                $('#sidebar').hide(400)
+            }
+        });
+    });
+    $('.hamburger-menu').add('.cross-icon').on('click', function () {
+        if ($('.wrapper:hidden').length === 0) {
+            $('.wrapper').fadeToggle(100);
+        };
+        if ($('#sidebar-icons .certificate-message:hidden').length === 0) {
+            $('#sidebar-icons .certificate-message').fadeToggle(100);
+        };
+        if ($(window).width() >= 510) {
+            if ($('#sidebar-icons').width() !== (15 * 16)) {
+                $('#sidebar-icons').animate({ width: 15 * 16 }, 300);
+                $('#sidebar-icons').css('border-bottom-right-radius', '8px');
+                $('#sidebar-icons').css('border-top-right-radius', '8px');
+                $('#sidebar-icons a .icon .sidebar-heading').each(function () {
+                    $(this).fadeIn(1000);
+                    $(this).css('margin-left', '0.5em');
+                });
+            } else {
+                $('#sidebar-icons a .icon .sidebar-heading').each(function () {
+                    $(this).hide();
+                });
+                $('#sidebar-icons').animate({ width: 4.2 * 16 }, 400);
+                $('#sidebar-icons').css('border-bottom-right-radius', '0px');
+                $('#sidebar-icons').css('border-top-right-radius', '0px');
+            }
+        } else {
+            if ($('#sidebar:hidden').length !== 0) {
+                $('#sidebar').show()
+                $('#sidebar-icons').css('width', '100%');
+                $('#sidebar-icons').css('height', '100%');
+                $('#sidebar-icons a .icon .sidebar-heading').each(function () {
+                    $(this).fadeIn(200);
+                    $(this).css('margin-left', '0.5em');
+                });
+            } else {
+                $('#sidebar').hide()
+                $('#sidebar-icons a .icon .sidebar-heading').each(function () {
+                    $(this).fadeOut(200);
+                });
+            }
+        }
+    });
+
+    const daysTag = document.querySelector(".days"),
+        currentDate = document.querySelector(".current-date"),
+        prevNextIcon = document.querySelectorAll(".icons span");
+
+    // getting new date, current year and month
+    let date = new Date(),
+        currYear = date.getFullYear(),
+        currMonth = date.getMonth();
+
+    // storing full name of all months in array
+    const months = ["January", "February", "March", "April", "May", "June", "July",
+        "August", "September", "October", "November", "December"];
+
+    const renderCalendar = () => {
+        let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), // getting first day of month
+            lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(), // getting last date of month
+            lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(), // getting last day of month
+            lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
+        let liTag = "";
+
+        for (let i = firstDayofMonth; i > 0; i--) { // creating li of previous month last days
+            liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
+        }
+
+        for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
+            // adding active class to li if the current day, month, and year matched
+            let isToday = i === date.getDate() && currMonth === new Date().getMonth()
+                && currYear === new Date().getFullYear() ? "active" : "";
+            liTag += `<li class="${isToday}">${i}</li>`;
+        }
+
+        for (let i = lastDayofMonth; i < 6; i++) { // creating li of next month first days
+            liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`
+        }
+        currentDate.innerText = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
+        daysTag.innerHTML = liTag;
+    }
+    renderCalendar();
+
+    prevNextIcon.forEach(icon => { // getting prev and next icons
+        icon.addEventListener("click", () => { // adding click event on both icons
+            // if clicked icon is previous icon then decrement current month by 1 else increment it by 1
+            currMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
+
+            if (currMonth < 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
+                // creating a new date of current year & month and pass it as date value
+                date = new Date(currYear, currMonth);
+                currYear = date.getFullYear(); // updating current year with new date year
+                currMonth = date.getMonth(); // updating current month with new date month
+            } else {
+                date = new Date(); // pass the current date as date value
+            }
+            renderCalendar(); // calling renderCalendar function
+        });
+    });
+
+</script>

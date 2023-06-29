@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>
+        <%= pageTitle %>
+    </title>
+</head>
+
+<body onload="courseError()">
+    <header>
+        <div class="header">
+            <div class="header-content">
+                <img src="/LMS-Logo.png" alt="LMS Logo" />
+            </div>
+            <div class="settings-panel">
+                <p id="timer"></p>
+                <img src="/cover-photo.webp" alt="profile pic" />
+            </div>
+        </div>
+    </header>
+    <main>
+        <section id="body">
+            <div id="profile-body">
+                <% if (error) { %>
+                  <div id="snackbar">Course not created. Invalid input!</div>
+                <% } %>
+                <div class="profile-head">
+                    <div style="font-size: 2rem; font-family: 'Poppins', sans-serif;">Admin</div>
+                    <div>
+                        <nav class="breadcrumbs">
+                            <a class="breadcrumbs__item" href="/admin">Admin</a>
+                            <a class="breadcrumbs__item is-active">Courses</a>
+                        </nav>
+                    </div>
+                    <div class="admin-logout">
+                        <a href="/logout">
+                            <button>Logout</button>
+                        </a>
+                    </div>
+                </div>
+                <div class="profile-content">
+                    <div class="content-heading">
+                        <p>Available Courses</p>
+                        <div>
+                            <button id="myBtn">Add Course</button>
+                        </div>
+                    </div>
+                    <div class="content-body grid">
+                        <% for (let course of courses) { %>
+                            <div class="course-card">
+                                <div class="course-image">
+                                    <a href="/courses/course/<%= course.name %>">
+                                        <img src="/<%= course.photo %>"alt="<%= course.name %>" />
+                                    </a>
+                                </div>
+                                <div class="course-detail">
+                                    <a href="/courses/course/<%= course.name %>">
+                                        <p><%= course.name %></p>
+                                    </a>
+                                    <a href="/admin/delete/<%= course.name %>">
+                                        <button>Delete</button>
+                                    </a>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div>
+        <%- include('../includes/footer.ejs') %>
+    </div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h3>Create Course</h3>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/admin/create" class="course__form" autocomplete="off">
+
+                    <input id="course_name" type="text" name="name" placeholder="Course Name" required />
+                    <div id="name-input" class="error"></div>
+
+                    <input id="course_instructor" type="text" name="instructor" placeholder="Instructor Name"required />
+                    <div id="instructor-input" class="error"></div>
+
+                    <input id="course_duration" type="text" name="duration" placeholder="Course duration [months]" maxlength="1" required />
+                    <div id="duration-input" class="error"></div>
+
+                    <input type="hidden" name="photo" value="default_course.jpg" />
+
+                    <input id="start_date" type="text" name="start_date" onkeyup="addHyphen(this)" placeholder="Start date: [YYYY]-[MM]" required maxlength="7" />
+                    <div id="start-input" class="error"></div>
+
+                    <input id="end_date" type="text" name="end_date" onkeyup="addHyphen(this)" placeholder="End date: [YYYY]-[MM]" required maxlength="7" />
+                    <div id="end-input" class="error"></div>
+
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                    <input type="submit" name="submit" value="Create" onclick="modal.style.display = 'none'"/><br>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- modal -->
+
+    <script>
+        var modal = document.getElementById("myModal"); // Get the modal
+        var btn = document.getElementById("myBtn");    // Get the button that opens the modal
+        var span = document.getElementsByClassName("close")[0];  // Get the <span> element that closes the modal
+        btn.onclick = function () {  // When the user clicks the button, open the modal 
+            modal.style.display = "block";
+        }
+        span.onclick = function () {  // When the user clicks on <span> (x), close the modal
+            modal.style.display = "none";
+        }
+        window.onclick = function (event) {  // When the user clicks anywhere outside of the modal, close it
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        function courseError() {
+            document.getElementById("snackbar").classList.add('show');
+            setTimeout(function () {
+                document.getElementById("snackbar").classList.toggle("show");
+            }, 2700);
+            modal.style.display = 'none';
+        }
+
+        setInterval(() => {
+            document.querySelector('#timer').innerHTML = new Date().toLocaleString();
+        }, 1000);
+
+        function addHyphen(element) {
+            let date = document.getElementById(element.id);
+            date = date.value.split('-').join('');    // Remove dash (-) if mistakenly entered.
+            let finalVal = date.match(/.{1,4}/g).join('-');
+            document.getElementById(element.id).value = finalVal;
+        }
+    </script>
+</body>
+
+</html>

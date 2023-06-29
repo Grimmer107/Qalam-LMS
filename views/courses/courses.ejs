@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/courses.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>
+        <%= pageTitle %>
+    </title>
+</head>
+
+<body>
+    <%- include('../includes/header.ejs', {username: username, profileImage: profileImage}) %>
+        <main>
+            <section id="body">
+                <div id="sidebar">
+                    <%- include('../includes/sidebar.ejs') %>
+                </div>
+                <div id="profile-body">
+                    <div id="snackbar">You have been enrolled.</div>
+                    <div class="profile-head">
+                        <div style="font-size: 2rem; font-family: 'Poppins', sans-serif;">Courses</div>
+                        <div>
+                            <nav class="breadcrumbs">
+                                <a class="breadcrumbs__item" href="/student/dashboard">Dashboard</a>
+                                <a class="breadcrumbs__item is-active">Courses</a>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="profile-content">
+                        <div class="content-heading">Available Courses</div>
+                        <div class="content-body grid">
+                            <% for (let course of courses) { %>
+                                <div class="course-card">
+                                    <div class="course-image">
+                                        <a href="/courses/course/<%= course.name %>">
+                                            <img src="/<%= course.photo %>"  alt="<%= course.name %>" />
+                                        </a>
+                                    </div>
+                                    <div class="course-detail">
+                                        <a href="/courses/course/<%= course.name %>">
+                                            <p>
+                                                <%= course.name %>
+                                            </p>
+                                        </a>
+                                        <a href="/student/courses/<%= course.name %>/<%= course.instructor %>">
+                                            <button onclick='courseEnroll()'>Enroll</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <%- include('../includes/footer.ejs') %>
+</body>
+
+<script>
+    function courseEnroll() {
+        document.getElementById("snackbar").classList.add('show');
+        setTimeout(function () {
+            document.getElementById("snackbar").classList.toggle("show");
+        }, 2700);
+    }
+    $(document).ready(function () {
+        $(`#sidebar-icons .course-link`).css('border-left', '3px solid cyan');
+        $(window).resize(function () {
+            if ($(window).width() >= 510) {
+                if ($(window).width() >= 510) {
+                    $(`#sidebar-icons .course-link`).css('border-left', '3px solid cyan');
+                }
+            } else {
+                $(`#sidebar-icons .course-link`).css('border-left', '3px solid transparent');
+            }
+        });
+        $('#sidebar-icons a').each(function () {
+            $(this).click(function(){
+                if ($('#sidebar-icons').width() === (15 * 16)){
+                    $('#sidebar-icons').animate({ width: 4.2 * 16 }, 100);
+                    $('#sidebar-icons').css('border-bottom-right-radius', '0px');
+                    $('#sidebar-icons').css('border-top-right-radius', '0px');
+                    $('#sidebar-icons a .icon .sidebar-heading').each(function () {
+                        $(this).fadeOut(100);
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+</html>

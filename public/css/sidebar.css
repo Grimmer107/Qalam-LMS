@@ -1,0 +1,260 @@
+* {
+    box-sizing: border-box;
+}
+
+#sidebar-icons {
+    background-color: #0d4877;
+    color: #fcfcfa;
+    position: fixed;
+    height: 100%;
+    z-index: 100;
+    width: 4.2em;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-top: 1em;
+}
+
+#sidebar-icons a {
+    text-decoration: none;
+    color: white;
+    width: 100%;
+    height: 3.5em;
+    margin-bottom: 0.7em;
+    text-align: center;
+    padding: 0.2em 0.2em;
+    border-left: 3px solid transparent;
+    border-right: 2px solid transparent;
+}
+
+.icon {
+    width: 97.5%;
+    height: 3em;
+    margin: auto;
+    text-align: center;
+    padding: 0.8em 0.8em 0.8em 0.95em;
+    border-radius: 6px;
+    text-align: left;
+    border: 2px solid transparent;
+}
+
+.icon:hover {
+    background-color: #26c6da;
+    cursor: pointer;
+}
+
+.icon i {
+    font-size: 1.2em;
+}
+
+.icon span {
+    display: none;
+}
+
+.show {
+    display: block;
+    margin-left: 0.4em;
+}
+
+.toggle {
+    border-left: 3px solid cyan;
+}
+
+.certificate-message {
+    display: none;
+    position: relative;
+    box-sizing: border-box;
+    width: 15em;
+    max-height: 6em;
+    padding: 10px 4px 8px;
+    background-color: black;
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+    word-wrap: break-word;
+    background: #333;
+    color: #fff;
+    z-index: 201;
+    font-size: 0.8em;
+    line-height: 1;
+    border-radius: 5px;
+    left: 5em;
+    top: -4em;
+}
+
+
+
+
+/* calender */
+
+.wrapper{
+    width: 450px;
+    background: #fff;
+    border-radius: 10px;
+    position: absolute;
+    left: 5em;
+    top: 5em;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    display: none;
+    z-index: 200;
+}
+.wrapper header{
+    display: flex;
+    align-items: center;
+    padding: 25px 30px 10px;
+    border-radius: 10px;
+    justify-content: space-between;
+}
+
+header .icons{
+    display: flex;
+}
+
+header .icons span{
+    height: 38px;
+    width: 38px;
+    margin: 0 1px;
+    cursor: pointer;
+    color: #878787;
+    text-align: center;
+    line-height: 38px;
+    font-size: 1.9rem;
+    user-select: none;
+    border-radius: 50%;
+}
+
+.icons span:last-child{
+    margin-right: -10px;
+}
+
+header .icons span:hover{
+    background: #f2f2f2;
+}
+
+header .current-date{
+    font-size: 1.45rem;
+    font-weight: 500;
+}
+
+.calendar{
+    padding: 20px;
+}
+
+.calendar ul{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    text-align: center;
+}
+
+.calendar .days{
+    margin-bottom: 20px;
+}
+
+.calendar li{
+    color: #333;
+    width: calc(100% / 7);
+    font-size: 1.07rem;
+}
+
+.calendar .weeks li{
+    font-weight: 500;
+    cursor: default;
+}
+
+.calendar .days li{
+    z-index: 1;
+    cursor: pointer;
+    position: relative;
+    margin-top: 30px;
+}
+
+.days li.inactive {
+    color: #aaa;
+}
+
+.days li.active {
+    color: #fff;
+}
+
+.days li::before {
+    position: absolute;
+    content: "";
+    left: 50%;
+    top: 50%;
+    height: 40px;
+    width: 40px;
+    z-index: -1;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.days li.active::before {
+    background: #9B59B6;
+}
+
+.days li:not(.active):hover::before{
+    background: #f2f2f2;
+}
+
+.cross-icon {
+    display: none;
+    width: 100%;
+    font-size: 1.5rem;
+    text-align: right;
+    padding: 1em 2em;
+}
+
+.close-calender {
+    width: 100%;
+    padding: 1em 1em;
+    text-align: right;
+    color: #0d4877;
+    font-size: 2rem;
+    display: none;
+}
+
+
+@media screen and (max-width: 510px) {
+
+    #sidebar {
+        display: none;
+    }
+    
+    #sidebar-icons {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    #sidebar-icons a {
+        width: 100%;
+        height: 100%;
+    }
+
+    .icon {
+        padding-left: 2em;
+        font-size: 1.8rem;
+    }
+
+    .cross-icon {
+        display: block;
+    }
+
+    .wrapper {
+        width: 100%; 
+        left: 0;
+        top: 0;
+        height: 100%;
+        padding-top: 2em;
+        border-radius: 0;
+    }
+
+    .close-calender {
+        display: block;
+    }
+
+    .certificate-message {
+        top: 1em;
+        left: 6em;
+    }
+}

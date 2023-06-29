@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="/css/course-details.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <%- include('../includes/header.ejs', {username: username, profileImage: profileImage}) %>
+    <div id="main__body">
+        <% if (username !== 'admin') { %>
+            <div id="sidebar">
+                <%- include('../includes/sidebar.ejs') %>
+            </div>
+        <% } %>
+        <div id="profile-body" class="<% username === 'admin' ? 'admin' : null %>" >
+            <div class="profile-head">
+                <div style="font-size: 2rem; font-family: 'Poppins', sans-serif;">Courses</div>
+                <div>
+                    <% if (username === 'admin') { %>
+                        <nav class="breadcrumbs">
+                            <a class="breadcrumbs__item" href="/admin">Admin</a>
+                            <a class="breadcrumbs__item is-active"><%= coursename %></a>
+                        </nav>
+                    <% } else { %>
+                        <nav class="breadcrumbs">
+                            <a class="breadcrumbs__item" href="/student/dashboard">Dashboard</a>
+                            <a class="breadcrumbs__item" href="/courses">Courses</a>
+                            <a class="breadcrumbs__item is-active"><%= coursename %></a>
+                        </nav>
+                    <% } %>
+                </div>
+            </div>
+            <div class="profile-content">
+                <div class="content-heading">Course Content</div>
+                <div class="grid">
+                    <% if (username === 'admin') { %>
+                        <div class="upload__input">
+                            <form enctype="multipart/form-data" action="/courses/course/upload" method="POST">
+                                <label for="file_input" class="file__input__tag">
+                                    <input id="file_input" type="file" name="file"/>
+                                    Upload File
+                                </label>
+                                <input type="hidden" name="coursename" value="<%= coursename %>" />
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <input type="submit">
+                            </form>
+                        </div>
+                    <% } %>
+                    <div class="content__section">
+                        <% var sr = 0 %>
+                        <table style="border-collapse: collapse;">
+                            <tr>
+                                <th style="width:5%">Sr.</th>
+                                <th class="table__header" style="width:85%; text-align: left; padding-left: 1em;">File</th>
+                                <% if (username === 'admin') { %>
+                                    <th style="width:10%">Delete</th>
+                                <% } else { %>
+                                    <th style="width:10%">Download</th>
+                                <% } %>
+                            </tr>
+                            <% for (let filename of content) { %>
+                                <tr>
+                                    <td class="Serial"><%= ++sr %></td>
+                                    <td class="filename">
+                                        <div class="content__file">
+                                            <a href="/courses/course/download/uploads/<%= filename %>"><%= filename %></a>
+                                        </div>
+                                    </td>
+                                    <% if (username === 'admin') { %>
+                                        <td class="download"><a href="/courses/course/uploads/delete?filename=<%= filename %>&coursename=<%= coursename %>"><i class="fa fa-remove" style="font-size:18px;" aria-hidden="true" title="Delete File"></i></a></td>
+                                    <% } else { %>
+                                        <td class="download"><a href="/courses/course/download/uploads/<%= filename %>"><i class="fa fa-external-link" title="Download" aria-hidden="true"></i></a></td>
+                                    <% } %>
+                                </tr>
+                            <% } %>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <%- include('../includes/footer.ejs') %>
+    </div>
+</body>
+
+<script>
+    $(document).ready(function () {
+        $(`#sidebar-icons .course-link`).css('border-left', '3px solid cyan');
+        $(window).resize(function () {
+            if ($(window).width() >= 510) {
+                if ($(window).width() >= 510) {
+                    $(`#sidebar-icons .course-link`).css('border-left', '3px solid cyan');
+                }
+            } else {
+                $(`#sidebar-icons .course-link`).css('border-left', '3px solid transparent');
+            }
+        });
+        $('#sidebar-icons a .icon .sidebar-heading').each(function(){
+            $(this).css({'position': 'relative', 'top': '-1.25em', 'left': '1.25em'})
+        })
+        $('#sidebar-icons a').each(function () {
+            $(this).click(function(){
+                if ($('#sidebar-icons').width() === (15 * 16)){
+                    $('#sidebar-icons').animate({ width: 4.2 * 16 }, 100);
+                    $('#sidebar-icons').css('border-bottom-right-radius', '0px');
+                    $('#sidebar-icons').css('border-top-right-radius', '0px');
+                    $('#sidebar-icons a .icon .sidebar-heading').each(function () {
+                        $(this).fadeOut(100);
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+</html>

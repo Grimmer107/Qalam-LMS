@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/edit-Student-Profile.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>
+        <%= pageTitle %>
+    </title>
+</head>
+
+<body>
+    <%- include('../includes/header.ejs', {username: username, profileImage: profileImage}) %>
+        <main>
+            <section id="body">
+                <div id="sidebar">
+                    <%- include('../includes/sidebar.ejs') %>
+                </div>
+                <div id="profile-body">
+                    <div class="profile-head">
+                        <div style="font-size: 2rem; font-family: 'Poppins', sans-serif;">User Profile</div>
+                        <div>
+                            <nav class="breadcrumbs">
+                                <a class="breadcrumbs__item" href="/student/dashboard">Dashboard</a>
+                                <a class="breadcrumbs__item" href="/student/my">Profile</a>
+                                <a class="breadcrumbs__item is-active">Courses</a>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="profile-content">
+                        <div class="profile-intro">
+                            <div class="profile-pic">
+                                <div>
+                                    <img alt="profile-pic" src="../../<%= profileImage %>" />
+                                </div>
+                                <div>
+                                    <p>
+                                        <%= name %>
+                                    </p>
+                                </div>
+                            </div>
+                            <div id="profile-intro-base"></div>
+                        </div>
+                        <div class="profile-detail">
+                            <div class="user-details-form">
+                                <div class="profile-tabs">
+                                    <a href="/student/details">
+                                        <div class="active">Details</div>
+                                    </a>
+                                    <a href="/student/courses">
+                                        <div>Courses</div>
+                                    </a>
+                                </div>
+                                <form method="POST" action="/student/myEdit">
+                                    <label class="form__label" for="firstname">First name:</label><br>
+                                    <input id="firstname" type="text" name="firstname" placeholder="<%= firstname %>"
+                                        class="form-element <%= validationErrors.find(e => e.param === 'firstname') || errorMessage.firstname ? 'invalid' : '' %>" /><br>
+                                    <div class="error__section">
+                                        <% if (errorMessage.firstname) { %>
+                                            <p class="error__message">
+                                                <%= errorMessage.firstname %>
+                                            </p>
+                                            <% } %>
+                                    </div>
+                                    <label class="form__label" for="surname">Surname:</label><br>
+                                    <input id="surname" type="text" name="surname" placeholder="<%= lastname %>"
+                                        class="form-element <%= validationErrors.find(e => e.param === 'surname') || errorMessage.surname ? 'invalid' : '' %>" /><br>
+                                    <div class="error__section">
+                                        <% if (errorMessage.surname) { %>
+                                            <p class="error__message">
+                                                <%= errorMessage.surname %>
+                                            </p>
+                                            <% } %>
+                                    </div>
+                                    <label class="form__label" for="email">Email:</label><br>
+                                    <input class="form-element" id="email" type="email" name="email"
+                                        placeholder="<%= email %>" value="<%= email %>" disabled /><br>
+                                    <input type="hidden" name="email" value="<%= email %>" />
+                                    <label class="form__label" for="gender">Gender:</label><br>
+                                    <input id="gender-male" type="radio" name="gender" value="male" <% if
+                                        (gender==='male' ) { %> checked <% } %> >
+                                        <label class="form__label radio" for="gender">Male</label>
+                                        <input id="gender-female" type="radio" name="gender" value="female" <% if
+                                            (gender==='female' ) { %> checked <% } %> />
+                                            <label class="form__label radio" for="gender">Female</label><br>
+                                            <label class="form__label" for="degree">Degree:</label><br>
+                                            <input id="degree" type="text" name="degree" placeholder="<%= degree %>"
+                                                class="form-element <%= validationErrors.find(e => e.param === 'degree') || errorMessage.degree ? 'invalid' : '' %>" /><br>
+                                            <div class="error__section">
+                                                <% if (errorMessage.degree) { %>
+                                                    <p class="error__message">
+                                                        <%= errorMessage.degree %>
+                                                    </p>
+                                                    <% } %>
+                                            </div>
+                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                            <div class="edit-profile-button">
+                                                <input type="submit" name="Edit Profile" value="Save">
+                                            </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <%- include('../includes/footer.ejs') %>
+</body>
+
+<script>
+    $(document).ready(function () {
+        $(`#sidebar-icons .dashboard-link`).css('border-left', '3px solid cyan');
+        $(window).resize(function () {
+            if ($(window).width() >= 510) {
+                if ($(window).width() >= 510) {
+                    $(`#sidebar-icons .dashboard-link`).css('border-left', '3px solid cyan');
+                }
+            } else {
+                $(`#sidebar-icons .dashboard-link`).css('border-left', '3px solid transparent');
+            }
+        });
+        $('#sidebar-icons a').each(function () {
+            $(this).click(function () {
+                if ($('#sidebar-icons').width() === (15 * 16)) {
+                    $('#sidebar-icons').animate({ width: 4.2 * 16 }, 100);
+                    $('#sidebar-icons').css('border-bottom-right-radius', '0px');
+                    $('#sidebar-icons').css('border-top-right-radius', '0px');
+                    $('#sidebar-icons a .icon .sidebar-heading').each(function () {
+                        $(this).fadeOut(100);
+                    });
+                }
+            })
+        });
+    });
+</script>
+
+</html>

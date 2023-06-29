@@ -1,0 +1,14 @@
+body {
+    text-align: center;
+    margin-top: 10em;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+h1 {
+    color: #373737;
+}
+
+.message {
+    color: #41424C;
+}

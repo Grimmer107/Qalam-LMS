@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in</title>
+    <link rel="stylesheet" href="/css/signin.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div></div>
+    <div class="signin__content">
+        <div class="signin__text">
+            <h1>
+                <b>Sign in to</b><br>
+                <h2>Learning Management System</h2>
+            </h1>
+            <div>
+                <p>If you don't have an account You can 
+                    <span><a href="/register">Register Now!</a></span>
+                </p>
+            </div>
+        </div>
+        <div class="signin__form">
+            <p>Sign in</p>
+            <form action="/" method="POST" autocomplete="off">
+                <input type="text" name="email" placeholder="Enter email or user name" value="<%= oldInput.email %>"
+                    class="<%= validationErrors.find(e => e.param === 'email') || errorMessage.email ? 'invalid' : '' %>" required />
+                <% if (errorMessage.email) { %>
+                    <p class="error__message"><%= errorMessage.email %></p>
+                <% } %>
+                <input type="password" name="password" placeholder="Password" value="<%= oldInput.password %>"
+                class="<%= validationErrors.find(e => e.param === 'password') || errorMessage.password ? 'invalid' : '' %>" required />
+                <% if (errorMessage.password) { %>
+                    <p class="error__message"><%= errorMessage.password %></p>
+                <% } %>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <input type="submit" name="login" value="Login" />
+            </form>
+        </div>
+    </div>
+    <div class="signin__image">
+        <img class="signin__image" src="/svgs/image2.svg" alt="student" />
+    </div>
+</body>
+
+</html>
