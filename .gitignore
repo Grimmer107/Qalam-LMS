@@ -36,3 +36,6 @@ coverage/
 
 # Visual Studio Code specific files
 .vscode/
+
+# Package lock
+package-lock.json
