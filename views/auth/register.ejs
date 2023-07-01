@@ -10,14 +10,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=La+Belle+Aurore&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="css/register.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="/favicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -32,51 +36,59 @@
             <form enctype="multipart/form-data" autocomplete="off" action="/register" method="POST">
                 <div class="register__form__input">
                     <input id="email" type="email" name="email" placeholder="Email"
-                    class="<%= validationErrors.find(e => e.param === 'email') || errorMessage.email ? 'invalid' : '' %>"/>
+                        class="<%= validationErrors.find(e => e.param === 'email') || errorMessage.email ? 'invalid' : '' %>" />
                     <div class="error__section">
                         <% if (errorMessage.email) { %>
-                            <p class="error__message"><%= errorMessage.email %></p>
-                        <% } %>
+                            <p class="error__message">
+                                <%= errorMessage.email %>
+                            </p>
+                            <% } %>
                     </div>
                 </div>
                 <div class="register__form__input">
-                    <input id="register__name" name="name" type="text" placeholder="Name" 
-                    class="<%= validationErrors.find(e => e.param === 'name') || errorMessage.name ? 'invalid' : '' %>"/>
+                    <input id="register__name" name="name" type="text" placeholder="Name"
+                        class="<%= validationErrors.find(e => e.param === 'name') || errorMessage.name ? 'invalid' : '' %>" />
                     <div class="error__section">
                         <% if (errorMessage.name) { %>
-                            <p class="error__message"><%= errorMessage.name %></p>
-                        <% } %>
+                            <p class="error__message">
+                                <%= errorMessage.name %>
+                            </p>
+                            <% } %>
                     </div>
                 </div>
                 <div class="register__form__input">
                     <input id="degree" type="text" name="degree" placeholder="Degree"
-                    class="<%= validationErrors.find(e => e.param === 'degree') || errorMessage.degree ? 'invalid' : '' %>"/>
+                        class="<%= validationErrors.find(e => e.param === 'degree') || errorMessage.degree ? 'invalid' : '' %>" />
                     <div class="error__section">
                         <% if (errorMessage.degree) { %>
-                            <p class="error__message"><%= errorMessage.degree %></p>
-                        <% } %>
+                            <p class="error__message">
+                                <%= errorMessage.degree %>
+                            </p>
+                            <% } %>
                     </div>
                 </div>
                 <fieldset>
                     <legend>Gender</legend>
                     <div class="radio">
                         <div class="register__form__radio">
-                            <input id="male" type="radio" name="gender" value="male"/>
+                            <input id="male" type="radio" name="gender" value="male" />
                             <label for="male">Male</label>
                         </div>
                         <div class="register__form__radio">
-                            <input id="female" type="radio" name="gender" value="female"/>
+                            <input id="female" type="radio" name="gender" value="female" />
                             <label for="female">Female</label>
                         </div>
                     </div>
                 </fieldset>
                 <div class="register__form__input">
                     <input id="password" type="password" name="password" placeholder="Password"
-                    class="<%= validationErrors.find(e => e.param === 'password') || errorMessage.password ? 'invalid' : '' %>"/>
+                        class="<%= validationErrors.find(e => e.param === 'password') || errorMessage.password ? 'invalid' : '' %>" />
                     <div class="error__section">
                         <% if (errorMessage.password) { %>
-                            <p class="error__message"><%= errorMessage.password %></p>
-                        <% } %>
+                            <p class="error__message">
+                                <%= errorMessage.password %>
+                            </p>
+                            <% } %>
                     </div>
                 </div>
                 <div class="profile__image__div">

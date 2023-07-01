@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.png">
 </head>
 
 <body>
@@ -23,7 +24,7 @@
                 <h2>Learning Management System</h2>
             </h1>
             <div>
-                <p>If you don't have an account You can 
+                <p>If you don't have an account You can
                     <span><a href="/register">Register Now!</a></span>
                 </p>
             </div>
@@ -32,17 +33,23 @@
             <p>Sign in</p>
             <form action="/" method="POST" autocomplete="off">
                 <input type="text" name="email" placeholder="Enter email or user name" value="<%= oldInput.email %>"
-                    class="<%= validationErrors.find(e => e.param === 'email') || errorMessage.email ? 'invalid' : '' %>" required />
+                    class="<%= validationErrors.find(e => e.param === 'email') || errorMessage.email ? 'invalid' : '' %>"
+                    required />
                 <% if (errorMessage.email) { %>
-                    <p class="error__message"><%= errorMessage.email %></p>
-                <% } %>
-                <input type="password" name="password" placeholder="Password" value="<%= oldInput.password %>"
-                class="<%= validationErrors.find(e => e.param === 'password') || errorMessage.password ? 'invalid' : '' %>" required />
-                <% if (errorMessage.password) { %>
-                    <p class="error__message"><%= errorMessage.password %></p>
-                <% } %>
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                <input type="submit" name="login" value="Login" />
+                    <p class="error__message">
+                        <%= errorMessage.email %>
+                    </p>
+                    <% } %>
+                        <input type="password" name="password" placeholder="Password" value="<%= oldInput.password %>"
+                            class="<%= validationErrors.find(e => e.param === 'password') || errorMessage.password ? 'invalid' : '' %>"
+                            required />
+                        <% if (errorMessage.password) { %>
+                            <p class="error__message">
+                                <%= errorMessage.password %>
+                            </p>
+                            <% } %>
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <input type="submit" name="login" value="Login" />
             </form>
         </div>
     </div>

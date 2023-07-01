@@ -18,6 +18,7 @@
     <title>
         <%= pageTitle %>
     </title>
+    <link rel="icon" href="/favicon.png">
 </head>
 
 <body>
@@ -45,7 +46,7 @@
                                 <div class="course-card">
                                     <div class="course-image">
                                         <a href="/courses/course/<%= course.name %>">
-                                            <img src="/<%= course.photo %>"  alt="<%= course.name %>" />
+                                            <img src="/<%= course.photo %>" alt="<%= course.name %>" />
                                         </a>
                                     </div>
                                     <div class="course-detail">
@@ -59,7 +60,7 @@
                                         </a>
                                     </div>
                                 </div>
-                            <% } %>
+                                <% } %>
                         </div>
                     </div>
                 </div>
@@ -87,8 +88,8 @@
             }
         });
         $('#sidebar-icons a').each(function () {
-            $(this).click(function(){
-                if ($('#sidebar-icons').width() === (15 * 16)){
+            $(this).click(function () {
+                if ($('#sidebar-icons').width() === (15 * 16)) {
                     $('#sidebar-icons').animate({ width: 4.2 * 16 }, 100);
                     $('#sidebar-icons').css('border-bottom-right-radius', '0px');
                     $('#sidebar-icons').css('border-top-right-radius', '0px');

@@ -28,7 +28,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-
+    <link rel="icon" href="/favicon.png">
 </head>
 
 <body>
@@ -80,22 +80,24 @@
                         </div>
 
                         <div class="slider-container">
-                                <div class="swiper-wrapper">
-                                    
-                                    <% for (let course of newCourses) { %>
-                                        <div class="course-slider-cards swiper-slide">
-                                            <div class="course-card-image">
-                                                <a href="/courses/course/<%= course.name %>">
-                                                    <img alt="<%= course.name %>" src="<%= course.photo %>" />
-                                                </a>
-                                            </div>
-                                            <div class="course-card-content">
-                                                <a href="/courses/course/<%= course.name %>"><%= course.name %></a>
-                                                <div class="course-status">Active</div>
-                                            </div>
+                            <div class="swiper-wrapper">
+
+                                <% for (let course of newCourses) { %>
+                                    <div class="course-slider-cards swiper-slide">
+                                        <div class="course-card-image">
+                                            <a href="/courses/course/<%= course.name %>">
+                                                <img alt="<%= course.name %>" src="<%= course.photo %>" />
+                                            </a>
                                         </div>
+                                        <div class="course-card-content">
+                                            <a href="/courses/course/<%= course.name %>">
+                                                <%= course.name %>
+                                            </a>
+                                            <div class="course-status">Active</div>
+                                        </div>
+                                    </div>
                                     <% } %>
-                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -110,7 +112,7 @@
 
                         <div class="course-show-body">
 
-                            <% if (completedCourses.length > 0 ) { %>
+                            <% if (completedCourses.length> 0 ) { %>
                                 <% for (let course of completedCourses) { %>
                                     <div class="course-slider-cards">
                                         <div class="course-card-image">
@@ -119,16 +121,18 @@
                                             </a>
                                         </div>
                                         <div class="course-card-content">
-                                            <a href="/courses/course/<%= course.name %>"><%= course.name %></a>
+                                            <a href="/courses/course/<%= course.name %>">
+                                                <%= course.name %>
+                                            </a>
                                             <div class="course-status completed">Complete</div>
                                         </div>
                                     </div>
-                                <% } %>
-                            <% } else { %>
-                                <div class="no-course">
-                                    No completed Courses
-                                </div>
-                            <% } %> 
+                                    <% } %>
+                                        <% } else { %>
+                                            <div class="no-course">
+                                                No completed Courses
+                                            </div>
+                                            <% } %>
                         </div>
 
                         <div class="course-all-show">
@@ -159,14 +163,14 @@
             high = (high + 1) % count;
         }, 3000);
 
-        function initializeSlider(cards){
-            for(let i = 0; i < cards.length; i++){
+        function initializeSlider(cards) {
+            for (let i = 0; i < cards.length; i++) {
                 cardsCopy.push(cards[i]);
             }
-            for(let i = 0; i < cardsCopy.length; i++){
+            for (let i = 0; i < cardsCopy.length; i++) {
                 $('.swiper-wrapper').children('.swiper-slide').eq(0).remove();
             }
-            for(let i = 0; i < 4; i++){
+            for (let i = 0; i < 4; i++) {
                 cardsCopy[(low + i) % count].style.display = 'block';
                 $('.swiper-wrapper').append(cardsCopy[(low + i) % count])
             }
@@ -175,7 +179,7 @@
         function updateSlider(low, high) {
             $('.swiper-wrapper').children('.swiper-slide').eq(0).remove();
             cards[(low) % count].style.display = 'none';
-            cardsCopy[(high+1) % count].style.display = 'block';
+            cardsCopy[(high + 1) % count].style.display = 'block';
             $('.swiper-wrapper').append(cardsCopy[(high + 1) % count])
         }
 
@@ -245,8 +249,8 @@
         });
 
         $('#sidebar-icons a').each(function () {
-            $(this).click(function(){
-                if ($('#sidebar-icons').width() === (15 * 16)){
+            $(this).click(function () {
+                if ($('#sidebar-icons').width() === (15 * 16)) {
                     $('#sidebar-icons').animate({ width: 4.2 * 16 }, 100);
                     $('#sidebar-icons').css('border-bottom-right-radius', '0px');
                     $('#sidebar-icons').css('border-top-right-radius', '0px');
@@ -259,4 +263,5 @@
 
     });
 </script>
+
 </html>

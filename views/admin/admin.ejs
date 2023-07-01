@@ -16,6 +16,7 @@
     <title>
         <%= pageTitle %>
     </title>
+    <link rel="icon" href="/favicon.png">
 </head>
 
 <body onload="courseError()">
@@ -34,49 +35,51 @@
         <section id="body">
             <div id="profile-body">
                 <% if (error) { %>
-                  <div id="snackbar">Course not created. Invalid input!</div>
-                <% } %>
-                <div class="profile-head">
-                    <div style="font-size: 2rem; font-family: 'Poppins', sans-serif;">Admin</div>
-                    <div>
-                        <nav class="breadcrumbs">
-                            <a class="breadcrumbs__item" href="/admin">Admin</a>
-                            <a class="breadcrumbs__item is-active">Courses</a>
-                        </nav>
-                    </div>
-                    <div class="admin-logout">
-                        <a href="/logout">
-                            <button>Logout</button>
-                        </a>
-                    </div>
-                </div>
-                <div class="profile-content">
-                    <div class="content-heading">
-                        <p>Available Courses</p>
-                        <div>
-                            <button id="myBtn">Add Course</button>
+                    <div id="snackbar">Course not created. Invalid input!</div>
+                    <% } %>
+                        <div class="profile-head">
+                            <div style="font-size: 2rem; font-family: 'Poppins', sans-serif;">Admin</div>
+                            <div>
+                                <nav class="breadcrumbs">
+                                    <a class="breadcrumbs__item" href="/admin">Admin</a>
+                                    <a class="breadcrumbs__item is-active">Courses</a>
+                                </nav>
+                            </div>
+                            <div class="admin-logout">
+                                <a href="/logout">
+                                    <button>Logout</button>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="content-body grid">
-                        <% for (let course of courses) { %>
-                            <div class="course-card">
-                                <div class="course-image">
-                                    <a href="/courses/course/<%= course.name %>">
-                                        <img src="/<%= course.photo %>"alt="<%= course.name %>" />
-                                    </a>
-                                </div>
-                                <div class="course-detail">
-                                    <a href="/courses/course/<%= course.name %>">
-                                        <p><%= course.name %></p>
-                                    </a>
-                                    <a href="/admin/delete/<%= course.name %>">
-                                        <button>Delete</button>
-                                    </a>
+                        <div class="profile-content">
+                            <div class="content-heading">
+                                <p>Available Courses</p>
+                                <div>
+                                    <button id="myBtn">Add Course</button>
                                 </div>
                             </div>
-                        <% } %>
-                    </div>
-                </div>
+                            <div class="content-body grid">
+                                <% for (let course of courses) { %>
+                                    <div class="course-card">
+                                        <div class="course-image">
+                                            <a href="/courses/course/<%= course.name %>">
+                                                <img src="/<%= course.photo %>" alt="<%= course.name %>" />
+                                            </a>
+                                        </div>
+                                        <div class="course-detail">
+                                            <a href="/courses/course/<%= course.name %>">
+                                                <p>
+                                                    <%= course.name %>
+                                                </p>
+                                            </a>
+                                            <a href="/admin/delete/<%= course.name %>">
+                                                <button>Delete</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                            </div>
+                        </div>
             </div>
         </section>
     </main>
@@ -96,24 +99,28 @@
                     <input id="course_name" type="text" name="name" placeholder="Course Name" required />
                     <div id="name-input" class="error"></div>
 
-                    <input id="course_instructor" type="text" name="instructor" placeholder="Instructor Name"required />
+                    <input id="course_instructor" type="text" name="instructor" placeholder="Instructor Name"
+                        required />
                     <div id="instructor-input" class="error"></div>
 
-                    <input id="course_duration" type="text" name="duration" placeholder="Course duration [months]" maxlength="1" required />
+                    <input id="course_duration" type="text" name="duration" placeholder="Course duration [months]"
+                        maxlength="1" required />
                     <div id="duration-input" class="error"></div>
 
                     <input type="hidden" name="photo" value="default_course.jpg" />
 
-                    <input id="start_date" type="text" name="start_date" onkeyup="addHyphen(this)" placeholder="Start date: [YYYY]-[MM]" required maxlength="7" />
+                    <input id="start_date" type="text" name="start_date" onkeyup="addHyphen(this)"
+                        placeholder="Start date: [YYYY]-[MM]" required maxlength="7" />
                     <div id="start-input" class="error"></div>
 
-                    <input id="end_date" type="text" name="end_date" onkeyup="addHyphen(this)" placeholder="End date: [YYYY]-[MM]" required maxlength="7" />
+                    <input id="end_date" type="text" name="end_date" onkeyup="addHyphen(this)"
+                        placeholder="End date: [YYYY]-[MM]" required maxlength="7" />
                     <div id="end-input" class="error"></div>
 
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
-                    <input type="submit" name="submit" value="Create" onclick="modal.style.display = 'none'"/><br>
-                    
+                    <input type="submit" name="submit" value="Create" onclick="modal.style.display = 'none'" /><br>
+
                 </form>
             </div>
         </div>
