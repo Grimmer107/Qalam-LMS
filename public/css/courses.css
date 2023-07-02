@@ -39,6 +39,7 @@ body::-webkit-scrollbar-thumb {
     padding: 1.5em;
     color: #685a64;
     box-sizing: border-box;
+    border-radius: 8px;
     border: 1px solid #c5c6c6;
 }
 
@@ -115,6 +116,7 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    border-radius: 8px;
 }
 
 
@@ -250,6 +252,12 @@ body::-webkit-scrollbar-thumb {
 @keyframes fadeout {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
+}
+
+@media screen and (max-width: 840px) {
+    .profile-content .grid {
+        justify-content: center;
+    }
 }
 
 
