@@ -60,6 +60,13 @@
     border-left: 3px solid cyan;
 }
 
+.icon #calender_icon {
+    padding-left: 0.15em;
+}
+.icon #certificate_icon {
+    padding-left: 0.1em;
+}
+
 .certificate-message {
     display: none;
     position: relative;
