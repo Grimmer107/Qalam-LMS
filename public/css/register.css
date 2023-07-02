@@ -212,7 +212,7 @@ fieldset {
     border: none;
     outline: none;
     border-radius: 1.5em;
-    margin-bottom: 1.5em;
+    margin-bottom: 2em;
     /* font-family: 'Open Sans', sans-serif; */
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -236,6 +236,13 @@ fieldset {
 
 .register__form__input .invalid {
     border: 2px solid red;
+}
+
+.file__error {
+    color: red;
+    padding-top: 2px;
+    margin-top: 2px;
+    font-size: 0.7rem;
 }
 
 .register__form__input .error__message {

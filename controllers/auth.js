@@ -135,7 +135,6 @@ exports.postRegister = (req, res, next) => {
     const gender = req.body.gender;
     const email = req.body.email;
     const password = req.body.password;
-    const image = req.file.path;
 
     const errors = validationResult(req);
     let messages = {};
@@ -175,7 +174,7 @@ exports.postRegister = (req, res, next) => {
                 gender: gender,
                 email: email,
                 password: hashedPassword,
-                photo: image
+                photo: req.file.path
             })
                 .then(result => {
                     req.session.isLoggedIn = true;
@@ -195,7 +194,7 @@ exports.postRegister = (req, res, next) => {
                                     name: name,
                                     degree: degree,
                                     username: req.session.user.name,
-                                    profileImage: image,
+                                    profileImage: req.file.image,
                                     completedCourses: completedCourses,
                                     newCourses: courses
                                 });

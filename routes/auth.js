@@ -55,6 +55,13 @@ router.post('/register',
             .isLength({ min: 5 })
             .isAlphanumeric()
             .trim(),
+        body('file').custom((value, { req }) => {
+            if (!req.file) {
+                return Promise.reject('Please upload a profile picture.')
+            } else {
+                return Promise.resolve()
+            }
+        }),
     ],
     AuthController.postRegister
 );

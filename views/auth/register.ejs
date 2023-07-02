@@ -96,10 +96,10 @@
                         <input class="profile__image" type="file" name="file" />
                         Upload Picture
                     </label>
-                    <div class="error__section">
-                        <% if (errorMessage.profileImage) { %>
+                    <div class="error__section file__error">
+                        <% if (errorMessage.file) { %>
                             <p class="error__message">
-                                <%= errorMessage.profileImage %>
+                                <%= errorMessage.file %>
                             </p>
                             <% } %>
                     </div>
