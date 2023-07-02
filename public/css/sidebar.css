@@ -90,6 +90,7 @@
     width: 450px;
     background: #fff;
     border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
     position: absolute;
     left: 5em;
     top: 5em;
@@ -109,24 +110,21 @@ header .icons{
     display: flex;
 }
 
-header .icons span{
-    height: 38px;
-    width: 38px;
-    margin: 0 1px;
+header .icons i{
+    margin: 0;
+    margin-left: 1em;
     cursor: pointer;
     color: #878787;
     text-align: center;
-    line-height: 38px;
-    font-size: 1.9rem;
+    font-size: 1.25rem;
     user-select: none;
-    border-radius: 50%;
 }
 
-.icons span:last-child{
+.icons i:last-child{
     margin-right: -10px;
 }
 
-header .icons span:hover{
+header .icons i:hover{
     background: #f2f2f2;
 }
 
