@@ -93,14 +93,21 @@
                 </div>
                 <div class="profile__image__div">
                     <label class="image__upload__label">
-                        <input class="profile__image" type="file" name="profileImage" />
+                        <input class="profile__image" type="file" name="file" />
                         Upload Picture
                     </label>
+                    <div class="error__section">
+                        <% if (errorMessage.profileImage) { %>
+                            <p class="error__message">
+                                <%= errorMessage.profileImage %>
+                            </p>
+                            <% } %>
+                    </div>
                 </div>
-                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <div class="register__submit__section">
                     <button class="register__submit__button" type="submit">Register</button>
                 </div>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <div class="back__login"><a href="/">Go back to login page!</a></div>
             </form>
         </div>

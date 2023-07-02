@@ -27,34 +27,34 @@ router.post('/',
 router.post('/register',
     [
         body('name')
-        .notEmpty()
-        .isString(),
+            .notEmpty()
+            .isString(),
 
         body('degree')
-        .notEmpty()
-        .isString(),
+            .notEmpty()
+            .isString(),
 
         body('email')
-        .notEmpty()
-        .isEmail()
-        .withMessage('Please enter a valid email address.')
-        .custom((value, { req }) => {
-            return Student.findByPk(value)
-                .then(userDoc => {
-                    if (userDoc) {
-                        return Promise.reject(
-                            'E-Mail exists already, please pick a different one.'
-                        );
-                    }
-                });
-        })
-        .normalizeEmail(),
+            .notEmpty()
+            .isEmail()
+            .withMessage('Please enter a valid email address.')
+            .custom((value, { req }) => {
+                return Student.findByPk(value)
+                    .then(userDoc => {
+                        if (userDoc) {
+                            return Promise.reject(
+                                'E-Mail exists already, please pick a different one.'
+                            );
+                        }
+                    });
+            })
+            .normalizeEmail(),
 
         body('password', 'Password must have at least 5 alphanumeric digits.')
-        .notEmpty()
-        .isLength({ min: 5 })
-        .isAlphanumeric()
-        .trim(), 
+            .notEmpty()
+            .isLength({ min: 5 })
+            .isAlphanumeric()
+            .trim(),
     ],
     AuthController.postRegister
 );
