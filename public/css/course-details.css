@@ -51,6 +51,7 @@ body::-webkit-scrollbar-thumb {
     color: #685a64;
     box-sizing: border-box;
     border: 1px solid #c5c6c6;
+    border-radius: 8px;
 }
 
 .admin {
@@ -133,6 +134,7 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    border-radius: 8px;
 }
 
 
@@ -150,27 +152,26 @@ body::-webkit-scrollbar-thumb {
 }
 
 .upload__input {
-    width: 90%;
-    height: 3em;
-    margin-left: 2em;
+    width: 95%;
+    height: 4em;
+    margin: auto;
     padding: 0.4em;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: right;
 }
 
 .upload__input form {
-    width: 100%;
+    margin-right: 1.5em;
 }
 
 .upload__input input[type="submit"] {
     color: white;
     background-color: #433dbf;
     outline: none;
-    border: none;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
+    border: 2px solid #433dbf;
+    border-radius: 8px;
     width: 10em;
     height: 3em;
 }
@@ -182,17 +183,14 @@ body::-webkit-scrollbar-thumb {
 
 .file__input__tag {
     width: 10em;
-    border-top: 1px solid #b9bdc0;
-    border-bottom: 1px solid #b9bdc0;
-    border-left: 1px solid #b9bdc0;
-    height: 2.85em;
+    border: 1px solid #b9bdc0;
     color: #685a64;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+    border-radius: 8px;
     background-color: #edf1f5;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.95rem;
-    padding: 0.75em 1.25em;
+    font-size: 0.8rem;
+    margin-right: 0.5em;
+    padding: 0.95em 2.5em;
     box-sizing: border-box;
 }
 
@@ -207,7 +205,7 @@ body::-webkit-scrollbar-thumb {
 
 .content__section {
     display: flex;
-    padding: 2.5em 0;
+    padding: 1em 0;
 }
 
 .content__section table {
@@ -218,8 +216,6 @@ body::-webkit-scrollbar-thumb {
 .content__section table .table__header {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    border-right: 1px solid #d2dbe4;
-    border-left: 1px solid #d2dbe4;
     background-color: #433dbf; 
     color:white;
     height: 2.5em
@@ -235,6 +231,8 @@ body::-webkit-scrollbar-thumb {
     border: 1px solid #323f4a;
     border-bottom: 0;
     height: 2em;
+    width: 85%;
+    padding-right: 4px;
     margin: 0;
 }
 
@@ -268,7 +266,9 @@ body::-webkit-scrollbar-thumb {
 }
 
 .content__file {
-    margin: 0.5em 1em;
+    margin:auto;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
     font-size: 1rem;
@@ -297,6 +297,22 @@ body::-webkit-scrollbar-thumb {
     color: #433dbf;
 }
 
+.content__section table #table_Sr {
+    width: 5%; 
+    border-top-left-radius: 8px;
+    border-right: 1px solid #d2dbe4;
+}
+.content__section table #table_file {
+    width: 85%; 
+    border-right: 1px solid #d2dbe4;
+    text-align: left; 
+    padding-left: 1em;
+}
+.content__section table #table_delete, #table_download {
+    width: 10%; 
+    border-top-right-radius: 8px;
+}
+
 @media screen and (max-width: 768px) {
     .content__section {
         font-size: 0.9rem;
@@ -304,8 +320,69 @@ body::-webkit-scrollbar-thumb {
 
     .content__section table .content__file {
         font-size: 0.9rem;
-        padding-right: 1em;
+        padding-right: 0.5em;
     }
+
+    .grid { 
+        padding-left: 0;
+    }
+
+    .upload__input {
+        width: 100%;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .upload__input form {
+        margin-right: 0;
+
+    }
+    .upload__input input[type="submit"] {
+        width: 7.5em
+    }
+
+    .file__input__tag {
+        width: 7.5em;
+        padding: 0.95em 1em;
+    }
+
+    .content__section {
+        display: flex;
+        padding: 1em 0;
+    }
+    
+    .content__section table {
+        width: 100%;
+        margin: auto;
+    }
+
+    .content__section table .table__header {
+        font-size: 0.7rem;
+        font-weight: 300;
+    }
+
+    .content__section table #table_Sr {
+        width: 10%; 
+    }
+    .content__section table #table_file {
+        width: 75%; 
+    }
+    .content__section table #table_delete, #table_download {
+        width: 15%; 
+    }
+
+    .content__section table .filename { 
+        width: 75%; 
+    }
+
+    .content__section table .Serial { 
+        width: 10%; 
+    }
+    .content__section table .delete, .download { 
+        width: 15%;
+    }
+
+    
 }
 
 @media screen and (max-width: 610px) {
