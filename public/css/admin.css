@@ -487,10 +487,14 @@ header {
 /* modal */
 
 
-@media screen and (max-width: 748px) {
-    .grid {
+@media screen and (max-width: 840px) {
+    .profile-content .grid {
         justify-content: center;
     }
+}
+
+
+@media screen and (max-width: 748px) {
 
     .admin-logout button {
         right: 2em;
