@@ -169,6 +169,8 @@ body::-webkit-scrollbar-thumb {
     background-color: #433dbf;
     outline: none;
     border: none;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
     width: 10em;
     height: 3em;
 }
@@ -180,12 +182,17 @@ body::-webkit-scrollbar-thumb {
 
 .file__input__tag {
     width: 10em;
-    height: 3em;
+    border-top: 1px solid #b9bdc0;
+    border-bottom: 1px solid #b9bdc0;
+    border-left: 1px solid #b9bdc0;
+    height: 2.85em;
     color: #685a64;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
     background-color: #edf1f5;
-    /* font-family: Arial, Helvetica, sans-serif; */
-    font-size: 1rem;
-    padding: 0.75em 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.95rem;
+    padding: 0.75em 1.25em;
     box-sizing: border-box;
 }
 
@@ -205,12 +212,17 @@ body::-webkit-scrollbar-thumb {
 
 .content__section table {
     width: 90%;
+    margin: auto;
 }
 
 .content__section table .table__header {
     margin: 0;
-    border-right: 1px solid #323f4a;
-    border-left: 1px solid #323f4a;
+    font-family: Arial, Helvetica, sans-serif;
+    border-right: 1px solid #d2dbe4;
+    border-left: 1px solid #d2dbe4;
+    background-color: #433dbf; 
+    color:white;
+    height: 2.5em
 }
 
 .content__section table .Serial {
@@ -222,7 +234,7 @@ body::-webkit-scrollbar-thumb {
     text-align: left;
     border: 1px solid #323f4a;
     border-bottom: 0;
-    height: 4em;
+    height: 2em;
     margin: 0;
 }
 
@@ -236,18 +248,32 @@ body::-webkit-scrollbar-thumb {
     cursor: pointer;
     color: black;
 }
+.content__section table .delete {
+    border-top: 1px solid #323f4a;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.content__section table .delete i {
+    cursor: pointer;
+    color: black;
+}
 
 .content__section table .download i:hover {
     color: blue;
 }
 
+.content__section table .delete i:hover {
+    color: red;
+}
+
 .content__file {
-    margin: 1.5em 1em;
+    margin: 0.5em 1em;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #685a64;
-    width: 100%;
+    width: 95%;
     overflow-wrap: break-word;
 }
 
