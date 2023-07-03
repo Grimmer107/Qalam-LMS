@@ -1,7 +1,8 @@
 <script>
     setInterval(() => {
-        document.querySelector('#timer').innerHTML = new Date().toLocaleString();
+        document.querySelector('#timer').innerHTML = new Date().toLocaleString('en-US', { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric' });
     }, 1000);
+
     function dropdownClick() {
         $('.header-dropdown .fa-caret-down').toggleClass('rotate');
         $('.header-dropdown .dropdown-content').slideToggle(100, function () {
@@ -39,30 +40,31 @@
             <span class="fa-solid fa-bars menu"></span>
         </div>
         <% } %>
-        <div class="header">
-            <div class="header-content">
-                <img src="/LMS-Logo.png" alt="LMS Logo" />
-            </div>
-            <div class="settings-panel">
-                <p id="timer"></p>
-                <img src="../../<%= profileImage %>" alt="profile pic" />
-                <div class="header-dropdown">
-                    <% if (username !=='admin' ) { %>
-                        <i onclick="dropdownClick()" class="fa-solid fa-caret-down"></i>
-                        <div id="mydropdown" class="dropdown-content">
-                            <a href="/student/dashboard">
-                                <div id="dropFirst"><span class="fa-solid fa-house" aria-hidden="true"></span></div>
-                                Dashboard
-                            </a>
-                            <a href="/student/my">
-                                <div id="dropSecond"><span class="fa fa-user" aria-hidden="true"></span></div>Profile
-                            </a>
-                            <a href="/logout">
-                                <div><span class="fas fa-unlock" aria-hidden="true"></span></div>Logout
-                            </a>
-                        </div>
-                    <% } %>
+            <div class="header">
+                <div class="header-content">
+                    <img src="/LMS-Logo.png" alt="LMS Logo" />
+                </div>
+                <div class="settings-panel">
+                    <p id="timer"></p>
+                    <img src="../../<%= profileImage %>" alt="profile pic" />
+                    <div class="header-dropdown">
+                        <% if (username !=='admin' ) { %>
+                            <i onclick="dropdownClick()" class="fa-solid fa-caret-down"></i>
+                            <div id="mydropdown" class="dropdown-content">
+                                <a href="/student/dashboard">
+                                    <div id="dropFirst"><span class="fa-solid fa-house" aria-hidden="true"></span></div>
+                                    Dashboard
+                                </a>
+                                <a href="/student/my">
+                                    <div id="dropSecond"><span class="fa fa-user" aria-hidden="true"></span></div>
+                                    Profile
+                                </a>
+                                <a href="/logout">
+                                    <div><span class="fas fa-unlock" aria-hidden="true"></span></div>Logout
+                                </a>
+                            </div>
+                            <% } %>
+                    </div>
                 </div>
             </div>
-        </div>
 </header>
