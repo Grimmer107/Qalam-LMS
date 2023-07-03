@@ -179,7 +179,7 @@ section {
     row-gap: 2em;
     padding-left: 1.5em;
     box-sizing: border-box;
-    justify-content: left;
+    justify-content: center;
 }
 
 .content-div .course-slider-button button:hover {
@@ -210,9 +210,9 @@ section {
     flex-direction: column;
 }
 
-.swiper-wrapper .swiper-slide {
+/* .swiper-wrapper .swiper-slide { */
     /* display: none; */
-}
+/* } */
 
 .no-course {
     width: 100%;
@@ -351,6 +351,7 @@ section {
     }
     .content-div .swiper-wrapper {
         justify-content: center;
+        width: 100%;
     }
 }
 
@@ -396,6 +397,11 @@ section {
         width: 2.5em;
         height: 2.5em;
         font-size: 0.7rem;
+    }
+
+    .content-div .slider-container { 
+        padding-left: 1em;
+        padding-right: 1em;
     }
 }
 

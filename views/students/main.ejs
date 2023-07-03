@@ -151,11 +151,14 @@
         let cards = $('.swiper-wrapper .swiper-slide');
         let count = cards.length;
         let replacedCards = []
-        cardsCopy = []
+        let cardsCopy = []
         let low = 0;
         let high = 3
+        let initialLength = 4
 
-        initializeSlider(cards);
+        initializeSlider(cards, initialLength);
+
+        window.addEventListener('resize', resizeHandler);
 
         setInterval(() => {
             updateSlider(low, high);
@@ -163,14 +166,30 @@
             high = (high + 1) % count;
         }, 3000);
 
-        function initializeSlider(cards) {
+        function resizeHandler() {
+            if (window.innerWidth > 1354) {
+                initialLength = 4
+            }
+            if (window.innerWidth <= 1354) {
+                initialLength = 3
+            }
+            if (window.innerWidth <= 1074) {
+                initialLength = 2
+            }
+            if (window.innerWidth <= 766) {
+                initialLength = 1
+            }
+            initializeSlider(cards, initialLength)
+        }
+
+        function initializeSlider(cards, initialLength) {
             for (let i = 0; i < cards.length; i++) {
                 cardsCopy.push(cards[i]);
             }
             for (let i = 0; i < cardsCopy.length; i++) {
                 $('.swiper-wrapper').children('.swiper-slide').eq(0).remove();
             }
-            for (let i = 0; i < 4; i++) {
+            for (let i = 0; i < initialLength; i++) {
                 cardsCopy[(low + i) % count].style.display = 'block';
                 $('.swiper-wrapper').append(cardsCopy[(low + i) % count])
             }
@@ -204,9 +223,6 @@
 </script>
 
 <script>
-    setInterval(() => {
-        document.querySelector('#timer').innerHTML = new Date().toLocaleString();
-    }, 1000);
 
     function dropdownClick() {
         $('.header-dropdown .fa-caret-down').toggleClass('rotate');
