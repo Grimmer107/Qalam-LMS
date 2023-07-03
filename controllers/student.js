@@ -5,29 +5,32 @@ const { validationResult } = require('express-validator');
 
 exports.getDashboard = (req, res, next) => {
     let completedCourses;
+    let user;
     Student.findByPk(req.session.user.email)
-    .then((user) => {
-        return StudentCourses.findAll({where: {completed: true, StudentEmail: req.session.user.email}})
-    })
-    .then((result) => {
-        completedCourses = result
-        return Courses.findAll({ limit: 6, order: [['createdAt', 'DESC']]});
-    })
-    .then((courses) => {
-        res.render('students/main', {
-            pageTitle: 'Profile',
-            name: user.name,
-            degree: user.degree,
-            username: req.session.user.name, 
-            profileImage: user.photo,
-            completedCourses: completedCourses,
-            newCourses: courses
+        .then((student) => {
+            user = student
+            return StudentCourse.findAll({ where: { completed: true, StudentEmail: req.session.user.email } })
+        })
+        .then((result) => {
+            completedCourses = result
+            return Courses.findAll({ limit: 6, order: [['createdAt', 'DESC']] });
+        })
+        .then((courses) => {
+            console.log(courses)
+            res.render('students/main', {
+                pageTitle: 'Profile',
+                name: user.name,
+                degree: user.degree,
+                username: req.session.user.name,
+                profileImage: user.photo,
+                completedCourses: completedCourses,
+                newCourses: courses
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.redirect('/');
         });
-    })
-    .catch(err => {
-        console.log(err);
-        res.redirect('/');
-    });
 }
 
 exports.getEditStudent = (req, res, next) => {
@@ -59,7 +62,7 @@ exports.postEditStudent = (req, res, next) => {
 
     const errors = validationResult(req);
     let messages = {};
-    errors.array().map(({param, msg}) => {
+    errors.array().map(({ param, msg }) => {
         messages[param] = msg;
     });
 
@@ -80,58 +83,58 @@ exports.postEditStudent = (req, res, next) => {
     }
 
     Student.findByPk(email)
-    .then(student => {
-        let firstname = req.body.firstname || student.name.split(' ')[0]
-        let surname = req.body.lastname || student.name.split(' ')[1]
-        const name = firstname  + ' ' + surname;
-        
-        student.name = name || student.name;
-        student.photo = photo || student.photo;
-        student.degree = degree || student.degree;
-        student.email = email || student.email;
-        student.gender = gender || student.gender;
-        return student.save()
-    })
-    .then(result => {
-        [firstname, surname] = result.name.split(' ');
-        res.render('students/student-profile', {
-            pageTitle: 'Edit Profile',
-            username: req.session.user.name,
-            errorMessage: messages,
-            validationErrors: errors.array(),
-            name: result.name,
-            firstname: firstname,
-            lastname: surname,
-            profileImage: req.session.user.photo,
-            degree: result.degree,
-            email: result.email,
-            gender: result.gender
+        .then(student => {
+            let firstname = req.body.firstname || student.name.split(' ')[0]
+            let surname = req.body.lastname || student.name.split(' ')[1]
+            const name = firstname + ' ' + surname;
+
+            student.name = name || student.name;
+            student.photo = photo || student.photo;
+            student.degree = degree || student.degree;
+            student.email = email || student.email;
+            student.gender = gender || student.gender;
+            return student.save()
         })
-    })
-    .catch(err => {
-        console.log(err);
-    })
+        .then(result => {
+            [firstname, surname] = result.name.split(' ');
+            res.render('students/student-profile', {
+                pageTitle: 'Edit Profile',
+                username: req.session.user.name,
+                errorMessage: messages,
+                validationErrors: errors.array(),
+                name: result.name,
+                firstname: firstname,
+                lastname: surname,
+                profileImage: req.session.user.photo,
+                degree: result.degree,
+                email: result.email,
+                gender: result.gender
+            })
+        })
+        .catch(err => {
+            console.log(err);
+        })
 };
 
 exports.getStudent = (req, res, next) => {
     Student.findByPk(req.session.user.email)
-    .then(result => {
-        [firstname, surname] = result.name.split(' ');
-        res.render('students/student-profile', {
-            pageTitle: 'Edit Profile',
-            username: req.session.user.name,
-            name: result.name,
-            firstname: firstname,
-            lastname: surname,
-            profileImage: result.photo,
-            degree: result.degree,
-            email: result.email,
-            gender: result.gender
+        .then(result => {
+            [firstname, surname] = result.name.split(' ');
+            res.render('students/student-profile', {
+                pageTitle: 'Edit Profile',
+                username: req.session.user.name,
+                name: result.name,
+                firstname: firstname,
+                lastname: surname,
+                profileImage: result.photo,
+                degree: result.degree,
+                email: result.email,
+                gender: result.gender
+            })
         })
-    })
-    .catch(err => {
-        console.log(err);
-    })
+        .catch(err => {
+            console.log(err);
+        })
 };
 
 exports.EnrollCourse = (req, res, next) => {
@@ -143,26 +146,26 @@ exports.EnrollCourse = (req, res, next) => {
         instructor: req.params.instructor,
         completed: false
     })
-    .then((studentCourse) => {
-        return StudentCourses.findAll({where: {completed: true, StudentEmail: req.session.user.email}})
-    })
-    .then((result) => {
-        completedCourses = result
-        return Courses.findAll({ limit: 6, order: [['createdAt', 'DESC']]});
-    })
-    .then((courses) => {
-        res.render('students/main', {
-            pageTitle: 'Profile',
-            name: req.session.user.name,
-            degree: req.session.user.degree,
-            username: req.session.user.name, 
-            profileImage: req.session.user.photo,
-            completedCourses: completedCourses,
-            newCourses: courses
+        .then((studentCourse) => {
+            return StudentCourses.findAll({ where: { completed: true, StudentEmail: req.session.user.email } })
+        })
+        .then((result) => {
+            completedCourses = result
+            return Courses.findAll({ limit: 6, order: [['createdAt', 'DESC']] });
+        })
+        .then((courses) => {
+            res.render('students/main', {
+                pageTitle: 'Profile',
+                name: req.session.user.name,
+                degree: req.session.user.degree,
+                username: req.session.user.name,
+                profileImage: req.session.user.photo,
+                completedCourses: completedCourses,
+                newCourses: courses
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.redirect('/');
         });
-    })
-    .catch(err => {
-        console.log(err);
-        res.redirect('/');
-    });
 }
