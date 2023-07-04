@@ -44,7 +44,8 @@
                 <div id="main-body">
 
                     <div class="content-div" id="course-profile">
-                        <img alt="student profile pic" src="../../<%= profileImage %>" />
+                        <img alt="student profile pic" src="/<%= profileImage %>"
+                            onerror="this.onerror=null;this.src='/default_user.png';" />
                         <div class="course-profile-detail">
                             <div id="name">
                                 <p>
