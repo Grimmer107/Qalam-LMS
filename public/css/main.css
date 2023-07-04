@@ -125,6 +125,7 @@ section {
     min-height: 15em;
     margin-bottom: 2em;
     background-color: white;
+    border: 1px solid #c5c6c6;
     border-bottom: 2px solid transparent;
     border-radius: 8px;
 }
@@ -266,15 +267,15 @@ section {
     color: black;
     background-color: #ffc107;
     width: 4em;
-    padding: 0.2em;
+    padding: 0.25em;
     height: 2em;
     text-align: center;
     box-sizing: border-box;
     position: relative;
-    border-radius: 0.2em;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    border-radius: 4px;
     font-family: 'Open Sans', sans-serif;
-    left: 12.5em;
+    left: 13.5em;
     top: 1em;
 }
 
