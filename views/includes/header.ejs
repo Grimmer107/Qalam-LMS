@@ -11,10 +11,9 @@
     }
     window.onclick = function (event) {
         if (!event.target.matches('.fa-caret-down')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
+            let dropdowns = document.getElementsByClassName("dropdown-content");
+            for (let i = 0; i < dropdowns.length; i++) {
+                let openDropdown = dropdowns[i];
                 if (openDropdown.classList.contains('show')) {
                     $('.header-dropdown .dropdown-content').slideUp(50, function () {
                         openDropdown.classList.remove('show');
@@ -60,7 +59,8 @@
                                     Profile
                                 </a>
                                 <a href="/logout">
-                                    <div><span class="fas fa-unlock" aria-hidden="true"></span></div>Logout
+                                    <div id="dropThird"><span class="fas fa-unlock" aria-hidden="true"></span></div>
+                                    Logout
                                 </a>
                             </div>
                             <% } %>

@@ -16,6 +16,10 @@ const StudentCourse = sequelize.define('StudentCourse', {
         primaryKey: true,
         allowNull: false,
     },
+    photo: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     instructor: Sequelize.STRING,
     completed: {
         type: Sequelize.BOOLEAN

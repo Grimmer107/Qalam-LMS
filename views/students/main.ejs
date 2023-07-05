@@ -59,12 +59,18 @@
                             </div>
                         </div>
                         <div class="course-status-detail">
-                            <div class="course-active-detail">Active Course:&nbsp<span>4</span></div>
-                            <div class="course-completed-detail">Completed Courses:&nbsp<span>18</span></div>
+                            <div class="course-active-detail">Active Course:&nbsp<span>
+                                    <%= newCourses.length %>
+                                </span></div>
                         </div>
-                        <div class="course-status-detail standing">
+                        <div class="course-status-detail">
+                            <div class="course-completed-detail">Enrolled Courses:&nbsp<span>
+                                    <%= enrolledCourses.length %>
+                                </span></div>
+                        </div>
+                        <!-- <div class="course-status-detail standing">
                             <div class="course-completed-detail">Academic Standing:&nbsp<span>Excellent</span></div>
-                        </div>
+                        </div> -->
                         <div class="student-profile-view">
                             <a href="/student/my"><button>View Profile</button></a>
                         </div>
@@ -107,31 +113,33 @@
                     <div class="content-div">
 
                         <div class="course-slider-head">
-                            <div style="color:#5e8698; font-size:1.1rem; margin-top: 1em; margin-left: 1em;">Completed
+                            <div style="color:#5e8698; font-size:1.1rem; margin-top: 1em; margin-left: 1em;">Your
                                 courses</div>
                         </div>
 
                         <div class="course-show-body">
 
-                            <% if (completedCourses.length> 0 ) { %>
-                                <% for (let course of completedCourses) { %>
+                            <% if (enrolledCourses.length> 0 ) { %>
+                                <% for (let course of enrolledCourses) { %>
                                     <div class="course-slider-cards">
                                         <div class="course-card-image">
                                             <a href="/courses/course/<%= course.name %>">
-                                                <img alt="<%= course.name %>" src="<%= course.photo %>" />
+                                                <img alt="<%= course.name %>" src="/<%= course.photo %>" />
                                             </a>
                                         </div>
                                         <div class="course-card-content">
-                                            <a href="/courses/course/<%= course.name %>">
-                                                <%= course.name %>
+                                            <a href="/courses/course/<%= course.CourseName %>">
+                                                <%= course.CourseName %>
                                             </a>
-                                            <div class="course-status completed">Complete</div>
+                                            <div class="course-status completed">
+                                                <%= course.completed==1 ? 'completed' : 'ongoing' %>
+                                            </div>
                                         </div>
                                     </div>
                                     <% } %>
                                         <% } else { %>
                                             <div class="no-course">
-                                                No completed Courses
+                                                No Enrolled Courses
                                             </div>
                                             <% } %>
                         </div>

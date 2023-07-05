@@ -113,6 +113,14 @@
                                                         <% } %>
                                                 </table>
                                         </div>
+                                        <div class="mark__complete__section">
+                                            <div class="mark__complete__div">
+                                                <a>
+                                                    <button onclick="markCourseCompleted()">Mark
+                                                        Course as Completed</button>
+                                                </a>
+                                            </div>
+                                        </div>
                             </div>
                         </div>
                     </div>
@@ -150,6 +158,13 @@
             });
         });
     });
+    function markCourseCompleted() {
+        fetch('/courses/course/completed/<%= coursename %>', {
+            method: 'POST', headers: {
+                'X-CSRF-TOKEN': "<%= csrfToken %>"
+            }
+        }).then(() => console.log()).catch(e => console.error(e))
+    }
 </script>
 
 </html>

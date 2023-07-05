@@ -28,11 +28,13 @@ main {
 section {
     display: flex;
     flex-direction: row;
+    background-color: #0d4877;
     width: 100%;
 }
 
 #sidebar {
     position: relative;
+    height: 100%;
     width: 4.2em;
 }
 
@@ -282,7 +284,7 @@ section {
 .course-card-content .completed {
     background-color: #007e50;
     color: white;
-    left: 10.5em;
+    left: 11.5em;
     width: 6em;
 }
 

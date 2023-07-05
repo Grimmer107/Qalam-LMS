@@ -7,16 +7,16 @@ const { check, body } = require('express-validator');
 router.post('/myEdit', is_auth,
     [
         body('firstname')
-        .isAlpha()
-        .notEmpty(),
+            .isAlpha()
+            .notEmpty(),
 
         body('surname')
-        .isAlpha()
-        .notEmpty(),
-        
+            .isAlpha()
+            .notEmpty(),
+
         body('degree')
-        .isString()
-        .notEmpty()
+            .isString()
+            .notEmpty()
     ],
     StudentController.postEditStudent
 );
@@ -27,6 +27,6 @@ router.get('/my', is_auth, StudentController.getStudent);
 
 router.get('/dashboard', is_auth, StudentController.getDashboard);
 
-router.get('/courses/:coursename/:instructor', is_auth, StudentController.EnrollCourse);
+router.get('/courses/:coursename/:instructor/:coursephoto', is_auth, StudentController.EnrollCourse);
 
 module.exports = router;

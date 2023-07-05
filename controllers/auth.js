@@ -88,11 +88,10 @@ exports.postLogin = (req, res, next) => {
                         if (user.name === 'admin') {
                             return res.redirect('/admin');
                         } else {
-                            let completedCourses;
-                            StudentCourses.findAll({ where: { completed: true, StudentEmail: req.session.user.email } })
+                            let enrolledCourses;
+                            StudentCourses.findAll({ where: { StudentEmail: req.session.user.email } })
                                 .then((result) => {
-                                    console.log(result)
-                                    completedCourses = result
+                                    enrolledCourses = result
                                     return Courses.findAll({ limit: 6, order: [['createdAt', 'DESC']] });
                                 })
                                 .then((courses) => {
@@ -102,7 +101,7 @@ exports.postLogin = (req, res, next) => {
                                         degree: user.degree,
                                         username: req.session.user.name,
                                         profileImage: user.photo,
-                                        completedCourses: completedCourses,
+                                        enrolledCourses: enrolledCourses,
                                         newCourses: courses
                                     });
                                 })

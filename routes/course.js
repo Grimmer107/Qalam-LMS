@@ -15,4 +15,6 @@ router.get('/course/:coursename', is_auth, CourseController.getCourse);
 
 router.get('/completed', is_auth, CourseController.getCompletedCourses);
 
+router.post('/course/completed/:coursename', is_auth, CourseController.markAsCompleted)
+
 module.exports = router;

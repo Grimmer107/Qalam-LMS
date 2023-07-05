@@ -4,26 +4,25 @@ const Courses = require('../models/course');
 const { validationResult } = require('express-validator');
 
 exports.getDashboard = (req, res, next) => {
-    let completedCourses;
+    let enrolledCourses;
     let user;
     Student.findByPk(req.session.user.email)
         .then((student) => {
             user = student
-            return StudentCourse.findAll({ where: { completed: true, StudentEmail: req.session.user.email } })
+            return StudentCourse.findAll({ where: { StudentEmail: req.session.user.email } })
         })
         .then((result) => {
-            completedCourses = result
+            enrolledCourses = result
             return Courses.findAll({ limit: 6, order: [['createdAt', 'DESC']] });
         })
         .then((courses) => {
-            console.log(courses)
             res.render('students/main', {
                 pageTitle: 'Profile',
                 name: user.name,
                 degree: user.degree,
                 username: req.session.user.name,
                 profileImage: user.photo,
-                completedCourses: completedCourses,
+                enrolledCourses: enrolledCourses,
                 newCourses: courses
             });
         })
@@ -138,19 +137,20 @@ exports.getStudent = (req, res, next) => {
 };
 
 exports.EnrollCourse = (req, res, next) => {
-    let completedCourses;
+    let enrolledCourses;
     StudentCourse.create({
         StudentName: req.session.user.name,
         StudentEmail: req.session.user.email,
         CourseName: req.params.coursename,
         instructor: req.params.instructor,
-        completed: false
+        completed: false,
+        photo: req.params.coursephoto
     })
-        .then((studentCourse) => {
-            return StudentCourses.findAll({ where: { completed: true, StudentEmail: req.session.user.email } })
+        .then((studentCourseDetail) => {
+            return StudentCourse.findAll({ where: { StudentEmail: req.session.user.email } })
         })
         .then((result) => {
-            completedCourses = result
+            enrolledCourses = result
             return Courses.findAll({ limit: 6, order: [['createdAt', 'DESC']] });
         })
         .then((courses) => {
@@ -160,7 +160,7 @@ exports.EnrollCourse = (req, res, next) => {
                 degree: req.session.user.degree,
                 username: req.session.user.name,
                 profileImage: req.session.user.photo,
-                completedCourses: completedCourses,
+                enrolledCourses: enrolledCourses,
                 newCourses: courses
             });
         })
