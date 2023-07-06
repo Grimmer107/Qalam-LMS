@@ -94,7 +94,11 @@ exports.getCourses = (req, res, next) => {
 
 exports.markAsCompleted = (req, res, next) => {
     StudentCourse.findAll({ where: { CourseName: req.params.coursename } }).then((result) => {
-        result[0].completed = 1
-        result[0].save()
-    }).catch(err => console.error(err));
+        if (result[0]) {
+            result[0].completed = 1
+            result[0].save()
+        }
+    }).catch(err => {
+        console.error(err)
+    });
 }

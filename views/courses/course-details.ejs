@@ -30,6 +30,7 @@
                 </div>
                 <% } %>
                     <div id="profile-body" class="<% username === 'admin' ? 'admin' : null %>">
+                        <div id="snackbar">The course has been marked completed.</div>
                         <div class="profile-head">
                             <div style="font-size: 2rem; font-family: 'Poppins', sans-serif;">Courses</div>
                             <div>
@@ -163,7 +164,17 @@
             method: 'POST', headers: {
                 'X-CSRF-TOKEN': "<%= csrfToken %>"
             }
-        }).then(() => console.log()).catch(e => console.error(e))
+        }).then((res) => {
+            console.log(result)
+            document.getElementById("snackbar").innerText = "The course has been marked completed"
+        }).catch(e => {
+            console.error(e)
+            document.getElementById("snackbar").innerText = "You have to be enrolled in the course"
+        })
+        document.getElementById("snackbar").classList.add('show');
+        setTimeout(function () {
+            document.getElementById("snackbar").classList.toggle("show");
+        }, 2700);
     }
 </script>
 
