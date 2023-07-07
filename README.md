@@ -14,7 +14,7 @@ Qalam is a learning management system for university students. It is made in Nod
 To run this project on your local environment, clone this repository and then run `npm install` or `yarn install` to install the dependencies and then run `npm run start` to run the project.
 
 ## How to Contribute ?
-To contribute into the project, look for already opened issues or open an issue and get it assigned to work on it. Create a pull request with meaningful description and link the issue it resolves for better clarity.
+To contribute into the project, look for already opened issues or open an issue and get it assigned to work on it. Clone the project, create a pull request with meaningful description and link the issue it resolves for better clarity.
 
 ## Project Images
 ![Admin Page](https://github.com/u01qureshi/Qalam-LMS/assets/111426368/4fdfdeb6-a765-471a-8e76-f4e4723300cc)
