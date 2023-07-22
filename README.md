@@ -16,6 +16,8 @@ To run this project on your local environment, clone this repository and then ru
 ## How to Contribute ?
 To contribute into the project, look for already opened issues or open an issue and get it assigned to work on it. Clone the project, create a pull request with meaningful description and link the issue it resolves for better clarity.
 
+**Leave a star if you like the project**
+
 ## Project Images
 ![Admin Page](https://github.com/u01qureshi/Qalam-LMS/assets/111426368/4fdfdeb6-a765-471a-8e76-f4e4723300cc)
 ![Login Page](https://github.com/u01qureshi/Qalam-LMS/assets/111426368/f0a594b0-ff0b-4afc-8763-d25b3ad656fb)
